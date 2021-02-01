@@ -1,2 +1,1 @@
-# ama-workshop
-A workshop for Azure Managed Applications
+# A workshop for Azure Managed Applications
