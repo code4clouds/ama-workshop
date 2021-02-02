@@ -62,8 +62,8 @@
     "variables": {
         "publicIPAddressName": "[concat(parameters('publicIPAddressName'), 'IP')]",
         "nicName": "[concat(parameters('vmNamePrefix'), 'nic')]",
-        "vnetID": "[resourceId('Microsoft.Network/virtualnetworks', 'vmVnet')]",
-        "subnetRef": "[concat(variables('vnetID'), '/subnets/subnet1')]",
+        "vmVNetName": "vmVNet",
+        "subnetName": "subnet1",
         "osType": {
             "imageOffer": "UbuntuServer",
             "imageSku": "18.04-LTS",
@@ -75,7 +75,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-11-01",
-            "name": "vmVnet",
+            "name": "[variables('vmVNetName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups/', 'NSG')]"
@@ -88,7 +88,7 @@
                 },
                 "subnets": [
                     {
-                        "name": "subnet1",
+                        "name": "[variables('subnetName')]",
                         "properties": {
                             "addressPrefix": "10.0.0.0/24",
                             "networkSecurityGroup": {
@@ -156,7 +156,7 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/', 'vmVnet')]"
+                "[resourceId('Microsoft.Network/virtualNetworks/', variables('vmVNetName'))]"
             ],
             "properties": {
                 "ipConfigurations": [
@@ -168,7 +168,7 @@
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
                             },
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', variables('subnetRef'))]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', variables('vmVNetName'), variables('subnetName'))]"
                             }
                         }
                     }
@@ -226,7 +226,9 @@
                 "name": "[parameters('storageAccountType')]"
             },
             "kind": "Storage",
-            "properties": {}
+            "properties": {
+                "allowBlobPublicAccess": true
+            }
         }
 
     ],

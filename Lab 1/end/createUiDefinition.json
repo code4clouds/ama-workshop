@@ -126,14 +126,14 @@
                         "name": "storageAccount",
                         "type": "Microsoft.Storage.MultiStorageAccountCombo",
                         "label": {
-                            "prefix": "Storage account name",
+                            "prefix": "Storage account name prefix",
                             "type": "Storage account type"
                         },
                         "defaultValue": {
                             "type": "Premium_LRS"
                         },
                         "toolTip": {
-                            "prefix": "Storage account name",
+                            "prefix": "Storage account name prefix",
                             "type": "Storage account type"
                         },
                         "count": 2,
