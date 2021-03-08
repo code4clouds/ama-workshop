@@ -8,34 +8,9 @@
         ],
         "steps": [
             {
-                "name": "storageConfig",
-                "label": "Storage settings",
-                "subLabel": {
-                    "preValidation": "Configure the infrastructure settings",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Storage settings",
-                "elements": [
-                    {
-                        "name": "storageAccounts",
-                        "type": "Microsoft.Storage.MultiStorageAccountCombo",
-                        "toolTip": "Storage account",
-                        "label": {
-                            "prefix": "Storage account name prefix",
-                            "type": "Storage account type"
-                        },
-                        "defaultValue": {
-                            "type": "Standard_LRS"
-                        },
-                        "constraints": {
-                            "allowedTypes": [
-                                "Premium_LRS",
-                                "Standard_LRS",
-                                "Standard_GRS"
-                            ]
-                        }
-                    }
-                ]
+                "name": "apiBladeStep",
+                "label": "API Calls",
+                "elements": []
             }
         ],
         "outputs": {

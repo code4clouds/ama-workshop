@@ -38,8 +38,8 @@ In this exercise, you will deploy a Managed Application in the Azure portal. You
 
 1.	Create a ZIP file that contains these 2 files at the root of the ZIP.
 
-- ama-workshop / Lab 1 / begin / createUiDefinition.json
-- ama-workshop / Lab 1 / begin / mainTemplate.json
+- ama-workshop / lab-1 / begin / createUiDefinition.json
+- ama-workshop / lab-1 / begin / mainTemplate.json
 
 2.	Name your ZIP file `app.zip`.
 

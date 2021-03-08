@@ -8,32 +8,77 @@
         ],
         "steps": [
             {
-                "name": "storageConfig",
-                "label": "Storage settings",
+                "name": "textBox",
+                "label": "Storage Account Prefix",
+                "bladeTitle": "Storage Account Prefix",
                 "subLabel": {
-                    "preValidation": "Configure the infrastructure settings",
+                    "preValidation": "Enter a prefix for your Storage Account Prefix",
                     "postValidation": "Done"
                 },
-                "bladeTitle": "Storage settings",
                 "elements": [
                     {
-                        "name": "storageAccounts",
-                        "type": "Microsoft.Storage.MultiStorageAccountCombo",
-                        "toolTip": "Storage account",
-                        "label": {
-                            "prefix": "Storage account name prefix",
-                            "type": "Storage account type"
-                        },
-                        "defaultValue": {
-                            "type": "Standard_LRS"
-                        },
+                        "name": "nameInstance",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Storage Account Prefix",
+                        "toolTip": "Use only allowed characters",
+                        "placeholder": "",
                         "constraints": {
-                            "allowedTypes": [
-                                "Premium_LRS",
-                                "Standard_LRS",
-                                "Standard_GRS"
+                            "required": true,
+                            "validations": [
+                                {
+                                    "regex": "^[a-zA-Z][a-z0-9A-Z]{3,3}$",
+                                    "message": "Only alphanumeric characters are allowed, and the value must be 4 characters long."
+                                }
                             ]
+                        },
+                        "visible": true
+                    }
+                ]
+            },            
+            {
+                "name": "apiBladeStep",
+                "label": "API Calls",
+                "elements": [
+                    {
+                        "name": "apiResourceGroups",
+                        "type": "Microsoft.Solutions.ArmApiControl",
+                        "toolTip": "This is an API that you will never see.",
+                        "request": {
+                            "method": "GET",
+                            "path": "[concat(subscription().id, '/resourcegroups?api-version=2020-06-01')]"
                         }
+                    },
+                    {
+                        "name": "ddlResourceGroups",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Existing Resource Groups",
+                        "toolTip": "Existing Resource Groups",
+                        "multiselect": true,
+                        "constraints": {
+                            "allowedValues": "[map(steps('apiBladeStep').apiResourceGroups.value, (item) => parse(concat('{\"label\":\"', item.name, '\",\"value\":\"', item.name, '\"}')))]",
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "apiStorageAccounts",
+                        "type": "Microsoft.Solutions.ArmApiControl",
+                        "toolTip": "This is an API that you will never see.",
+                        "request": {
+                            "method": "GET",
+                            "path": "[concat(subscription().id, '/providers/Microsoft.Storage/storageAccounts?api-version=2019-06-01')]"
+                        }
+                    },
+                    {
+                        "name": "ddlStorageAccounts",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Existing Storage Accounts",
+                        "toolTip": "Existing Storage Accounts",
+                        "constraints": {
+                            "allowedValues": "[map(steps('apiBladeStep').apiStorageAccounts.value, (item) => parse(concat('{\"label\":\"', item.name, '\",\"value\":\"', item.name, '\"}')))]",
+                            "required": true
+                        },
+                        "visible": true
                     }
                 ]
             }
