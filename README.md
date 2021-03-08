@@ -1,4 +1,4 @@
 # A workshop for Azure Managed Applications
 
-- [Lab 1 - Your first Azure Managed Application](./docs/lab1.md)
-- Lab 2
+1. [Lab 1 - Your first Azure Managed Application](./docs/lab1.md)
+2. [Lab 2 - Partner Center Walkthough](https://dstarr.github.io/ama-workshop/Lab%202/index.html)
