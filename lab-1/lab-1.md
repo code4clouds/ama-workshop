@@ -38,8 +38,8 @@ In this exercise, you will deploy a Managed Application in the Azure portal. You
 
 1.	Create a ZIP file that contains these 2 files at the root of the ZIP.
 
-- ama-workshop / Lab 1 / begin / createUiDefinition.json
-- ama-workshop / Lab 1 / begin / mainTemplate.json
+- ama-workshop / lab-1 / begin / createUiDefinition.json
+- ama-workshop / lab-1 / begin / mainTemplate.json
 
 2.	Name your ZIP file `app.zip`.
 
@@ -211,8 +211,8 @@ Here you will update the `createUiDefinition.json` file to create an installatio
 3.	Add the following 2 lines to the end of the outputs section. These are the parameter names you included in the ARM template earlier.
 
 ```json
-            "storageAccountPrefix": "[steps('storageBlade').storageAccount.prefix]",
-            "storageAccountType": "[steps('storageBlade').storageAccount.type]"
+"storageAccountPrefix": "[steps('storageBlade').storageAccount.prefix]",
+"storageAccountType": "[steps('storageBlade').storageAccount.type]"
 ```
 
 ## Use the ARM template test toolkit
